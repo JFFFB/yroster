@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YRoster • BYU Football Jersey Lookup</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#002E5D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" href="./icon-192.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header>
+  <div class="brand"><img src="./icon-192.png" alt="" width="34" height="34">
+    <div><h1>YRoster • BYU 2026</h1><p>Jersey &amp; stats lookup</p></div></div>
+  <div class="tabs" role="tablist">
+    <button id="tab-keypad" role="tab" aria-selected="true">Keypad</button>
+    <button id="tab-roster" role="tab" aria-selected="false">Full List</button>
+  </div>
+</header>
+
+<div class="status">
+  <div class="txt"><span id="dot"></span><span id="status-text">Loading…</span></div>
+  <div class="links">
+    <a class="chip" href="https://byucougars.com/sports/football/roster" target="_blank" rel="noopener noreferrer">BYU ↗</a>
+    <a class="chip espn" href="https://www.espn.com/college-football/team/stats/_/id/252" target="_blank" rel="noopener noreferrer">ESPN ↗</a>
+    <button id="sync-btn" class="chip go" aria-label="Refresh live ESPN data">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Sync</button>
+  </div>
+</div>
+
+<main id="view-keypad">
+  <section class="disp">
+    <div class="l">
+      <div id="numbox" class="numbox"><span>#</span><b id="num">__</b></div>
+      <div style="min-width:0"><div id="t1" class="t1">Tap a jersey number</div><div id="t2" class="t2"></div></div>
+    </div>
+    <button id="top-clear" class="clr hide" aria-label="Clear number">CLEAR</button>
+  </section>
+  <section id="results" class="results" aria-live="polite"></section>
+  <section class="keypad" aria-label="Jersey number keypad">
+    <button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button>
+    <button class="key" data-key="4">4</button><button class="key" data-key="5">5</button><button class="key" data-key="6">6</button>
+    <button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button>
+    <button class="key act" data-key="Escape">Clear</button>
+    <button class="key" data-key="0">0</button>
+    <button class="key act" data-key="Backspace" aria-label="Backspace"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"/></svg></button>
+  </section>
+</main>
+
+<main id="view-roster" class="hide">
+  <section class="filters">
+    <div class="search">
+      <input id="q" type="search" inputmode="search" autocomplete="off" placeholder="Search name, #, position, hometown…" aria-label="Search roster">
+      <button id="q-clear" class="hide" aria-label="Clear search">✕</button>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div id="pills" class="pills"></div><span id="count" class="cnt"></span>
+    </div>
+  </section>
+  <section id="list" class="results"></section>
+</main>
+
+<div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="sheet">
+    <div class="hd"><div><h3 id="m-title"></h3><p>Saved on this device only</p></div><button class="x" id="m-close" aria-label="Close">✕</button></div>
+    <div class="bd">
+      <label>Games played <input id="m-gp" type="text" placeholder="e.g., 10 GP"></label>
+      <label>ESPN stat line <textarea id="m-espn" rows="2"></textarea></label>
+      <label>BYU stat line <textarea id="m-byu" rows="2"></textarea></label>
+      <label>Note (optional) <textarea id="m-note" rows="2" placeholder="Your own note about a difference"></textarea></label>
+      <button class="btn" id="m-save">Save</button>
+      <button class="btn sec" id="m-reset">Reset to saved baseline</button>
+    </div>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
